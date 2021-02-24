@@ -55,7 +55,7 @@ fi
 dbcmd="mysql -h ${DB_HOST} -P ${DB_PORT} -u "${DB_USER}" "-p${DB_PASSWORD}""
 unset DB_PASSWORD
 
-echo "Waiting ${DB_TIMEOUT}s for database to be ready..."
+echo "Waiting ${DB_TIMEOUT}s for database to be ready... dbcmd: $dbcmd"
 counter=1
 while ! ${dbcmd} -e "show databases;" > /dev/null 2>&1; do
   sleep 1
