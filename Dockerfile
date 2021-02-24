@@ -26,7 +26,7 @@ RUN apk --update --no-cache add \
     mtr \
     net-snmp \
     net-snmp-tools \
-    nginx \
+#    nginx \
     nmap \
     openssl \
     perl \
