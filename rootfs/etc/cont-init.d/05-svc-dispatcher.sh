@@ -88,7 +88,9 @@ if [ ! -f "/data/.env" ]; then
   exit 1
 fi
 cat "/data/.env" >>"${LIBRENMS_PATH}/.env"
-DISPATCHER_NODE_ID=$(date +%s)
+
+DISPATCHER_NODE_ID=$(curl -s "$ECS_CONTAINER_METADATA_URI_V4/task" | jq -r ".TaskARN")
+
 if [ -n "$DISPATCHER_NODE_ID" ]; then
   echo "NODE_ID: $DISPATCHER_NODE_ID"
   sed -i "s|^NODE_ID=.*|NODE_ID=$DISPATCHER_NODE_ID|g" "${LIBRENMS_PATH}/.env"
