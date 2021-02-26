@@ -54,6 +54,8 @@ if [ -z "$DB_PASSWORD" ]; then
   exit 1
 fi
 
+echo "ECS_CONTAINER_METADATA_URI_V4:${ECS_CONTAINER_METADATA_URI_V4}"
+
 dbcmd="mysql -h ${DB_HOST} -P ${DB_PORT} -u "${DB_USER}" "-p${DB_PASSWORD}""
 unset DB_PASSWORD
 
