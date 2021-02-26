@@ -56,7 +56,7 @@ fi
 
 echo "ECS_CONTAINER_METADATA_URI_V4:${ECS_CONTAINER_METADATA_URI_V4} >>>"
 curl --request GET -sL \
-  --url "${ECS_CONTAINER_METADATA_URI_V4}" \
+  --url "${ECS_CONTAINER_METADATA_URI_V4}/task" \
 echo "ECS_CONTAINER_METADATA_URI_V4:${ECS_CONTAINER_METADATA_URI_V4} <<<"
 
 dbcmd="mysql -h ${DB_HOST} -P ${DB_PORT} -u "${DB_USER}" "-p${DB_PASSWORD}""
@@ -88,6 +88,7 @@ if [ ! -f "/data/.env" ]; then
   exit 1
 fi
 cat "/data/.env" >>"${LIBRENMS_PATH}/.env"
+DISPATCHER_NODE_ID= date +%s
 if [ -n "$DISPATCHER_NODE_ID" ]; then
   echo "NODE_ID: $DISPATCHER_NODE_ID"
   sed -i "s|^NODE_ID=.*|NODE_ID=$DISPATCHER_NODE_ID|g" "${LIBRENMS_PATH}/.env"
